@@ -1,11 +1,3 @@
-/**
- * create a class called "Person" with properties for name, age and country. 
- * a method to display the person's details. 
- * Create two instances  and display their details.
- * 
- * a static method to compare the ages of two Person instances and returns the older one.
- */
-
 class Person {
     #birthYear;
 
@@ -20,8 +12,15 @@ class Person {
         return `Name: ${this.name}, Age: ${this.age}, Country: ${this.country}`;
     }
 
-    static whoIsOlder(person1, person2) {
-        return person1.age > person2.age ? person1 : person2;
+    setBirthYear() {
+        const currentYear = new Date().getFullYear();
+        this.birthYear = currentYear - this.age;
+    }
+
+    updateAge() {
+        const currentYear = new Date().getFullYear();
+        const currentAge = currentYear - this.birthYear;
+        this.age = currentAge;
     }
 
     get age() {
@@ -41,15 +40,8 @@ class Person {
         this.#birthYear = value;
     }
 
-    setBirthYear() {
-        const currentYear = new Date().getFullYear();
-        this.birthYear = currentYear - this.age;
-    }
-
-    updateAge() {
-        const currentYear = new Date().getFullYear();
-        const currentAge = currentYear - this.birthYear;
-        this.age = currentAge;
+    static whoIsOlder(person1, person2) {
+        return person1.age > person2.age ? person1 : person2;
     }
 
     static showDetailInTable(...people) {
