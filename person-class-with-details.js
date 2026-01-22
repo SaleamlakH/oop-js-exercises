@@ -29,16 +29,26 @@ class Person {
         if (value < 0 || !Number(value)) return;
         return this._age = value;
     }
+
+    static showDetailInTable(...people) {
+        console.table(people);
+    }
+
+    // create a give number of instances
+    static createInstances(...instancesData) {
+        let instances = [];
+
+        for (const data of instancesData) {
+            let person = new this(...data);
+            instances.push(person);
+        }
+
+        this.showDetailInTable(...instances)
+    }
 }
 
-let person1 = new Person('Rekik', '24', 'Ethiopia');
-let person2 = new Person('Ezra', '23', 'Ethiopia');
+let person1 = ['Rekik', '24', 'Ethiopia'];
+let person2 = ['Ezra', '23', 'Ethiopia'];
+let person3 = ['somebody', '20', 'Ethiopia'];
 
-console.log('person1 details');
-console.log(person1.details());
-
-console.log('\nperson2 details');
-console.log(person2.details());
-
-let olderPerson = Person.whoIsOlder(person1, person2);
-console.log("\nThe older person is\n", olderPerson.details());
+Person.createInstances(person1, person2, person3);
