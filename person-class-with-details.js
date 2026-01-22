@@ -20,6 +20,15 @@ class Person {
     static whoIsOlder(person1, person2) {
         return person1.age > person2.age ? person1 : person2;
     }
+
+    get age() {
+        return this._age;
+    }
+
+    set age(value) {
+        if (value < 0 || !Number(value)) return;
+        return this._age = value;
+    }
 }
 
 let person1 = new Person('Rekik', '24', 'Ethiopia');
