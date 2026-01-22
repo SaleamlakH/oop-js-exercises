@@ -7,10 +7,13 @@
  */
 
 class Person {
+    #birthYear;
+
     constructor(name, age, country) {
         this.name = name;
         this.age = age;
         this.country = country;
+        this.setBirthYear();
     }
 
     details() {
@@ -29,6 +32,25 @@ class Person {
         if (value < 0 || !Number(value)) return;
         return this._age = value;
     }
+    
+    get birthYear() {
+        return this.#birthYear;
+    }
+
+    set birthYear(value) {
+        this.#birthYear = value;
+    }
+
+    setBirthYear() {
+        const currentYear = new Date().getFullYear();
+        this.birthYear = currentYear - this.age;
+    }
+
+    updateAge() {
+        const currentYear = new Date().getFullYear();
+        const currentAge = currentYear - this.birthYear;
+        this.age = currentAge;
+    }
 
     static showDetailInTable(...people) {
         console.table(people);
@@ -40,6 +62,7 @@ class Person {
 
         for (const data of instancesData) {
             let person = new this(...data);
+            person.setBirthYear();
             instances.push(person);
         }
 
